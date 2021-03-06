@@ -1,17 +1,16 @@
 import * as api from '../api' // * means import everything from api
 
-// Action Creators - are functions that return actions
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = async (dispatch, posts) => {
     try {
         const { data } = await api.fetchPosts();
-        dispatch({ type: "FETCH_ALL", payload: data })
+        dispatch({ type: "FETCH_ALL", payload: [{ ...posts, data }] })
     } catch (err) {
         console.log(err.message)
     }
 }
 
-export const createPost = (post) => async (dispatch) => {
+export const createPost = async (dispatch, post) => {
     try {
         const { data } = await api.createPost(post);
         dispatch({ type: 'CREATE', payload: data })

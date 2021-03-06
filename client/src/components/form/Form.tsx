@@ -1,13 +1,13 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, useContext } from 'react'
 import { TextField, Typography, Button, Paper } from '@material-ui/core'
 import FileBase from 'react-file-base64'
 import { Post } from '../../globalTypes'
-import { useDispatch } from 'react-redux'
-import { createPost } from '../../actions/Post'
-
+import GlobalContext from '../../context/GlobalContext'
 import useStyles from './styles'
 
 const Form = () => {
+    const { createPost, dispatch } = useContext(GlobalContext);
+
     const [postData, setPostData] = useState<Post>({
         creator: '',
         title: '',
@@ -15,13 +15,12 @@ const Form = () => {
         message: '',
         selectedFile: ''
     });
-    const dispatch = useDispatch();
 
     const classes = useStyles();
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        dispatch(createPost(postData))
+        createPost(dispatch, postData);
     }
 
     const clear = () => {

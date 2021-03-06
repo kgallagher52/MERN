@@ -8,26 +8,25 @@ import Posts from './components/posts/Posts'
 import Form from './components/form/Form'
 import useStyles from './styles'
 
-const initialState = [{ posts: [] }];
+const initialState = { posts: [] };
 
 const App = () => {
   const [state, dispatch] = useReducer(PostReducer, initialState);
   const classes = useStyles();
   const { posts } = state;
-
   useEffect(() => {
     dispatch(getPosts(dispatch, posts));
-  }, [dispatch, posts])
+    // eslint-disable-next-line  
+  }, [dispatch])
 
   return (
     <GlobalContext.Provider
       value={{
-        state,
+        posts,
         createPost,
-        dispatch
+        dispatch,
       }}
     >
-      {console.log(state)}
       <Container maxWidth="lg">
         <AppBar className={classes.appBar} position="static" color="inherit" >
           <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>

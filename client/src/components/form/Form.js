@@ -1,14 +1,13 @@
 import { FormEvent, useState, useContext } from 'react'
 import { TextField, Typography, Button, Paper } from '@material-ui/core'
 import FileBase from 'react-file-base64'
-import { Post } from '../../globalTypes'
 import GlobalContext from '../../context/GlobalContext'
 import useStyles from './styles'
 
 const Form = () => {
     const { createPost, dispatch } = useContext(GlobalContext);
 
-    const [postData, setPostData] = useState<Post>({
+    const [postData, setPostData] = useState({
         creator: '',
         title: '',
         tags: '',

@@ -1,10 +1,10 @@
-import * as api from '../api' // * means import everything from api
+import * as api from '../api/Index' // * means import everything from api
 
 
 export const getPosts = async (dispatch, posts) => {
     try {
         const { data } = await api.fetchPosts();
-        dispatch({ type: "FETCH_ALL", payload: [{ ...posts, data }] })
+        dispatch({ type: "FETCH_ALL", payload: { ...posts, posts: data } })
     } catch (err) {
         console.log(err.message)
     }
@@ -18,3 +18,4 @@ export const createPost = async (dispatch, post) => {
         console.log(err.message)
     }
 }
+

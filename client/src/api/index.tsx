@@ -1,7 +1,7 @@
 import axios from 'axios'
+import { Post } from '../globalTypes'
+const url = "http://localhost:8080/posts"
 
-const url = "http://localhost:5000/posts"
+export const fetchPosts = () => { return axios.get(url); }
 
-export const fetchPosts = () => {
-    axios.get(url);
-}
+export const createPost = (newPost: Post) => axios.post(url, newPost)

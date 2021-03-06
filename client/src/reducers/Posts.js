@@ -1,16 +1,14 @@
-// 
 const initialState = []
 
-export default (state = initialState, action) => {
+export default (posts = initialState, action) => {
     switch (action.type) {
         case 'FETCH_ALL':
-
-            break;
+            return action.payload
         case 'CREATE_ALL':
 
-            break;
+            return [...posts, action.payload]
 
         default:
-            return state;
+            return posts;
     }
 }

@@ -14,3 +14,15 @@ Using MongoDB atlas
     3. cors - Cross Origin Resource Sharing
     4. mongoose - Used for our object data modeling
     5. dotenv - allows us to use .env file to hide our secrets 
+
+# API
+
+| *Name*        | *Method*      | *Path*             |
+| -------------:|:-------------:| -----------------: |
+| List          | GET           | /posts             |
+| Retrieve      | GET           | /posts/id          |
+| Update        | Patch         | /posts/id          |
+| Update        | Patch         | /posts/id/likePost |
+| Create        | POST          | /posts             |
+| Delete        | DELETE        | /posts/id          |
+| -------------:|:-------------:| -----------------: |

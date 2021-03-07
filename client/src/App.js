@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer } from 'react';
 import GlobalContext from './context/GlobalContext'
-import { getPosts, createPost, updatePost } from './actions/Index'
+import { getPosts, createPost, updatePost, deletePost, likePost } from './actions/Index'
 import { PostReducer } from './reducers/Index'
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core'
 import memories from './images/memories.png'
@@ -30,9 +30,13 @@ const App = () => {
         dispatch,
         currentId,
         setCurrentId,
-        updatePost
+        updatePost,
+        deletePost,
+        likePost
       }}
     >
+      {console.log(posts)}
+
       <Container maxWidth="lg">
         <AppBar className={classes.appBar} position="static" color="inherit" >
           <Typography className={classes.heading} variant="h2" align="center">Memories</Typography>

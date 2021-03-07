@@ -5,6 +5,7 @@ This is a full stack application utilizing React, Redux, Express, Node, and type
 [Tutorial first part](https://www.youtube.com/watch?v=ngc9gnGgUdA)
 [Tutorial second part](https://www.youtube.com/watch?v=aibtHnbeuio)
 [HTTP Status Codes](https://www.restapitutorial.com/httpstatuscodes.html)
+[SVG Background](https://www.svgbackgrounds.com/#slanted-gradient)
 # BackEnd
 Using MongoDB atlas
 ## Packages

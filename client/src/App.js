@@ -1,6 +1,6 @@
-import { useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import GlobalContext from './context/GlobalContext'
-import { getPosts, createPost } from './actions/Index'
+import { getPosts, createPost, updatePost } from './actions/Index'
 import { PostReducer } from './reducers/Index'
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core'
 import memories from './images/memories.png'
@@ -12,7 +12,10 @@ const initialState = { posts: [] };
 
 const App = () => {
   const [state, dispatch] = useReducer(PostReducer, initialState);
+  const [currentId, setCurrentId] = useState(null);
+
   const classes = useStyles();
+
   const { posts } = state;
   useEffect(() => {
     dispatch(getPosts(dispatch, posts));
@@ -25,6 +28,9 @@ const App = () => {
         posts,
         createPost,
         dispatch,
+        currentId,
+        setCurrentId,
+        updatePost
       }}
     >
       <Container maxWidth="lg">

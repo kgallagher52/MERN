@@ -1,12 +1,14 @@
-import { FormEvent, useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { TextField, Typography, Button, Paper } from '@material-ui/core'
 import FileBase from 'react-file-base64'
 import GlobalContext from '../../context/GlobalContext'
 import useStyles from './styles'
 
-const Form = () => {
-    const { createPost, dispatch } = useContext(GlobalContext);
+// GET THE CURRENT ID OF POST
 
+const Form = () => {
+    const { createPost, dispatch, currentId, setCurrentId, updatePost, posts } = useContext(GlobalContext);
+    const post = currentId && posts.find((p) => p._id === currentId)
     const [postData, setPostData] = useState({
         creator: '',
         title: '',
@@ -17,19 +19,44 @@ const Form = () => {
 
     const classes = useStyles();
 
-    const handleSubmit = (e: FormEvent) => {
+    useEffect(() => {
+        if (post) setPostData(post);
+        return () => {
+            setPostData({
+                creator: '',
+                title: '',
+                tags: '',
+                message: '',
+                selectedFile: ''
+            })
+        }
+    }, [post])
+
+    const handleSubmit = (e) => {
         e.preventDefault();
-        createPost(dispatch, postData);
+        if (currentId) {
+            dispatch(updatePost(dispatch, currentId, postData))
+        } else {
+            createPost(dispatch, postData);
+        }
+
     }
 
     const clear = () => {
-
+        setPostData({
+            creator: '',
+            title: '',
+            tags: '',
+            message: '',
+            selectedFile: ''
+        })
+        setCurrentId(null);
     }
 
     return (
         <Paper className={classes.paper}>
             <form className={`${classes.root} ${classes.form}`} autoComplete="off" noValidate onSubmit={handleSubmit}>
-                <Typography variant="h6">Creating a Memory</Typography>
+                <Typography variant="h6">{currentId ? "Updating a Memory" : "Creating a Memory"}</Typography>
                 <TextField
                     name="creator"
                     variant="outlined"
@@ -66,7 +93,7 @@ const Form = () => {
                     <FileBase
                         type="file"
                         multiple={false}
-                        onDone={({ base64 }: any) => setPostData({ ...postData, selectedFile: base64 })}
+                        onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })}
                     />
                 </div>
                 <Button
